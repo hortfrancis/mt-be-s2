@@ -1,6 +1,6 @@
 require('dotenv').config();
 const textWebSocket = require('./sockets/textWebSocket');
-// const audioWebSocket = require('./sockets/audioWebSocket');
+const audioWebSocket = require('./sockets/audioWebSocket');
 
 textWebSocket.start();
-// audioWebSocket.start();
+audioWebSocket.start();
