@@ -1,4 +1,11 @@
+
+
+
+
+
+
 const WebSocket = require('ws');
+const sessionStore = require('../utils/SessionStore');
 
 let textWebSocketServer;
 
@@ -28,6 +35,7 @@ const start = () => {
                         // Establish a new session with the client
                         if (data.message.type === 'system' && data.message.task === 'establish-session') {
                             console.log('Received request to establish session:', data.message.content.sessionId);
+                            sessionStore.addSocket(data.message.content.sessionId, ws, 'text');
 
                             // // Assume you have a way to store the association between session IDs and WebSocket connections
                             // associateSessionIdWithConnection(data.sessionId, ws);
