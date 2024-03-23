@@ -17,10 +17,14 @@ const start = () => {
             }
         });
 
-        transcribeEnglishStream(audioStream);
+        const transcriptionStream = transcribeEnglishStream(audioStream);
+        transcriptionStream.on('data', (data) => { 
+            console.log('Transcription:', data.toString());
+            ws.send(data.toString());
+        });
 
         ws.on('message', (message) => {
-            console.log('Received message:', message); // <-- This log here 
+            console.log('Received message:', message);
             if (message instanceof Buffer) {
                 audioStream.write(message);
             } else {
