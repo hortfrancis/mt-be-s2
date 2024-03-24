@@ -32,6 +32,7 @@ const start = () => {
             if (JSON.parse(message).message.type === 'system' && JSON.parse(message).message.task === 'establish-session') {
                 console.log('Received request to establish session:', JSON.parse(message).message.sessionId);
                 sessionStore.addSocket(JSON.parse(message).message.sessionId, ws, 'audio');
+                ws.send(JSON.stringify({ message: { type: 'system', task: 'session-established' } }));
                 return;  // Prevent the session handshake message from being processed as audio data
             }
 
